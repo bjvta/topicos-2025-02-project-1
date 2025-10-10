@@ -1,143 +1,124 @@
-# Enrollment Platform - Microservices Architecture
+# Tópicos - UAGRM 2025-02
 
-A microservices-based enrollment platform with API Gateway and three independent services built with Next.js and Docker.
+Repositorio del curso de Tópicos, enfocado en el desarrollo de un **Sistema de Inscripción Universitaria** utilizando arquitecturas modernas, concurrencia y manejo de estado.
 
-## Architecture
+## Sobre el Curso
 
-- **API Gateway (nginx)**: Routes requests to appropriate microservices
-- **Enrollment Service**: Handles enrollment operations
-- **Student Data Service**: Manages student information
-- **Subjects Service**: Manages subject offerings
+Este curso es un proyecto práctico donde se aprenderá a construir sistemas distribuidos modernos, enfrentando desafíos reales como:
 
-## Project Structure
+- Manejo de concurrencia con cupos limitados
+- Arquitecturas basadas en microservicios
+- Desarrollo de clientes Web y Mobile
+- Gestión de estados asincrónicos
+- Testing de carga y deployment en la nube
+
+## Estructura del Repositorio
 
 ```
-enrollment-platform-project/
-├── docker-compose.yml
-├── gateway/
-│   └── nginx.conf
-└── services/
-    ├── enrollment-service/
-    │   ├── Dockerfile
-    │   ├── package.json
-    │   ├── next.config.js
-    │   └── pages/
-    │       └── api/
-    │           └── index.js
-    ├── student-data-service/
-    │   ├── Dockerfile
-    │   ├── package.json
-    │   ├── next.config.js
-    │   └── pages/
-    │       └── api/
-    │           └── index.js
-    └── subjects-service/
-        ├── Dockerfile
-        ├── package.json
-        ├── next.config.js
-        └── pages/
-            └── api/
-                └── index.js
+topicos-2025-02-project-1/
+├── README.md                  # Este archivo
+├── syllabus.md                # Cronograma detallado del curso
+├── lectures/                  # Material de clases
+│   ├── clase-03-manejo-estado.md
+│   ├── clase-04-concurrencia-mobile.md
+│   └── ...
+├── examples/                  # Ejemplos de código por clase
+│   ├── clase-02-microservices/    # Arquitectura de microservicios
+│   ├── clase-04-mobile-app/       # Aplicación móvil con React Native
+│   └── ...
+├── assignments/               # Tareas y temas de exposición
+│   └── temas-exposicion.md
+└── assets/                    # Recursos e imágenes
+    └── images/
 ```
 
-## API Endpoints
+## Navegación Rápida
 
-All requests go through the API Gateway at `http://localhost:3000`:
+### Sistema de Evaluación
 
-### Main Endpoints
-- **GET /enrollment/api** → "You are in the enrollment service"
-- **GET /student-data/api** → "You are in the student data service"
-- **GET /subjects/api** → "You are in the offer of subjects service"
+El proyecto se evalúa de la siguiente manera:
+- **25%** - Presentación intermedia (16 de Octubre)
+- **25%** - Presentación final (30 de Octubre)
+- **50%** - Tareas semanales y actividades en clase
 
-### Health Check Endpoints
-- **GET /enrollment/health** → Enrollment service health status
-- **GET /student-data/health** → Student data service health status
-- **GET /subjects/health** → Subjects service health status
-- **GET /health** → Gateway health check
+Consulta el [syllabus.md](./syllabus.md) para ver el desglose completo de la evaluación.
 
-## Getting Started
+### Cronograma
 
-### Prerequisites
+Consulta el [syllabus.md](./syllabus.md) para ver el cronograma completo del curso con:
+- Sistema de evaluación detallado
+- Fechas de entrega
+- Conceptos a cubrir en cada clase
+- Entregables mínimos y opcionales
 
-- Docker
-- Docker Compose
+### Material de Clases
 
-### Run the Application
+Accede a las notas de clase en la carpeta [lectures/](./lectures/):
+- **Clase 3**: [Manejo de Estado](./lectures/clase-03-manejo-estado.md)
+- **Clase 4**: [Concurrencia y Consistencia en Mobile](./lectures/clase-04-concurrencia-mobile.md)
 
-1. **Build and start all services:**
-   ```bash
-   docker-compose up --build
-   ```
+### Ejemplos de Código
 
-2. **Test the endpoints:**
-   ```bash
-   # Main Endpoints
-   curl http://localhost:3000/enrollment/api
-   curl http://localhost:3000/student-data/api
-   curl http://localhost:3000/subjects/api
+Explora los ejemplos funcionales en [examples/](./examples/):
+- **Clase 2**: [Arquitectura de Microservicios con Docker](./examples/clase-02-microservices/) - Sistema completo con API Gateway y servicios independientes
+- **Clase 4**: [Aplicación Mobile con React Native](./examples/clase-04-mobile-app/) - Cliente móvil para inscripción de materias
 
-   # Health Checks
-   curl http://localhost:3000/enrollment/health
-   curl http://localhost:3000/student-data/health
-   curl http://localhost:3000/subjects/health
-   curl http://localhost:3000/health
-   ```
+Cada ejemplo incluye su propio README con instrucciones de instalación y ejecución.
 
-3. **Stop the services:**
-   ```bash
-   docker-compose down
-   ```
+### Tareas y Exposiciones
 
-### Development Mode
+Revisa los temas de exposición y tareas en [assignments/](./assignments/)
 
-To run a single service in development mode:
+## Proyecto Principal: Sistema de Inscripción Universitaria
 
-```bash
-cd services/enrollment-service
-npm install
-npm run dev
-```
+El proyecto consiste en desarrollar un sistema de inscripción que incluye:
 
-**Important:** When running in dev mode, access the API at:
-- `http://localhost:3000/api` (NOT just `http://localhost:3000/`)
+### Backend
+- Arquitectura de microservicios
+- Manejo de concurrencia con colas (Producer-Consumer)
+- Validación de cupos limitados
+- Idempotencia con `requestId`
+- API Gateway con nginx
 
-You'll get a 404 on the root URL because these are API-only services without a home page.
+### Frontend Web
+- Interfaz para inscripción de materias
+- Manejo de estados: Pending, Confirmed, Rejected
+- Actualización en tiempo real (Polling/WebSockets/SSE)
 
-## Services Details
+### Frontend Mobile
+- Aplicación nativa (React Native/Flutter/etc)
+- Retry strategies
+- Persistencia local de sesión
 
-### Enrollment Service
-- **Container**: `enrollment-service`
-- **Internal Port**: 3000
-- **Route**: `/enrollment/*`
+### Testing y Deployment
+- Pruebas de carga con JMeter
+- Deployment en la nube
+- Introducción a Kubernetes
 
-### Student Data Service
-- **Container**: `student-data-service`
-- **Internal Port**: 3000
-- **Route**: `/student-data/*`
+## Tecnologías Principales
 
-### Subjects Service
-- **Container**: `subjects-service`
-- **Internal Port**: 3000
-- **Route**: `/subjects/*`
+- **Backend**: Node.js, Next.js, Docker
+- **Frontend Web**: React, Next.js, etc
+- **Mobile**: React Native (Expo), etc
+- **Infraestructura**: Docker, Docker Compose, nginx
+- **Testing**: JMeter
+- **Cloud**: AWS, etc
 
-### API Gateway
-- **Container**: `api-gateway`
-- **External Port**: 3000 (exposed to host)
-- **Technology**: nginx (Alpine Linux)
+## Fechas Importantes
 
-## Docker Network
+- **14 de Octubre**: Mini Presentación Web/Mobile
+- **21 de Octubre**: Resultados de pruebas con JMeter
+- **28 de Octubre**: Presentación intermedia con demo en cloud
+- **30 de Octubre**: Presentación final
 
-All services communicate through a bridge network called `microservices-network`.
+## Recursos Adicionales
 
-## Adding New Endpoints
+- [Designing Data-Intensive Applications](https://dataintensive.net/) - Martin Kleppmann
+- [Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) - Martin Fowler
+- [Mobile App UX Principles](https://developers.google.com/web/fundamentals/design-and-ux/principles)
 
-To add new endpoints to any service, create new API route files in the respective service's `pages/api/` directory:
+---
 
-```javascript
-// services/enrollment-service/pages/api/new-endpoint.js
-export default function handler(req, res) {
-  res.status(200).json({ message: 'New endpoint response' });
-}
-```
-
-Access at: `http://localhost:3000/enrollment/api/new-endpoint`
+**Universidad Autónoma Gabriel René Moreno (UAGRM)**
+Carrera de Ingeniería Informática
+Semestre 2025-02

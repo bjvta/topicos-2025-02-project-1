@@ -32,3 +32,4 @@ yarn-error.log*
 # Debug
 *.tsbuildinfo
 next-env.d.ts
+notas-internas.md
