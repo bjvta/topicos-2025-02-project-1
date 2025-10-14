@@ -56,6 +56,7 @@ Consulta el [syllabus.md](./syllabus.md) para ver el cronograma completo del cur
 Accede a las notas de clase en la carpeta [lectures/](./lectures/):
 - **Clase 3**: [Manejo de Estado](./lectures/clase-03-manejo-estado.md)
 - **Clase 4**: [Concurrencia y Consistencia en Mobile](./lectures/clase-04-concurrencia-mobile.md)
+- **Clase 5**: [Estado Eventual y Manejo de Errores](./lectures/clase-05-estado-eventual-errores.md)
 
 ### Ejemplos de Código
 
