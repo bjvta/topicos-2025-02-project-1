@@ -1,0 +1,23 @@
+{
+  "name": "clase-8-testing",
+  "version": "1.0.0",
+  "description": "Ejemplos de testing para la clase 8",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:ejercicio1": "vitest ejercicio-1-demo",
+    "test:ejercicio2": "vitest ejercicio-2-guiado",
+    "test:ejercicio3": "vitest ejercicio-3-independiente"
+  },
+  "keywords": [
+    "testing",
+    "vitest",
+    "unit-tests"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^1.0.0"
+  }
+}
